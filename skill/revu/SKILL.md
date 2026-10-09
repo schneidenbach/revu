@@ -1,6 +1,7 @@
 ---
 name: revu
-description: Open the revu review window so the user can review this session's code changes (across all touched repos/worktrees) PR-style and send comments back. Use when the user says "open a review", "let me review", "review in revu", "/revu", or after finishing a chunk of work when they want to review it.
+description: Open the revu review window for this session's code changes across every repo or worktree it touched, wait for the user to submit a PR-style review, then address the comments. Only runs when the user invokes /revu.
+disable-model-invocation: true
 ---
 
 # revu
@@ -9,7 +10,7 @@ description: Open the revu review window so the user can review this session's c
 
 ## Steps
 
-1. Collect every repo/worktree directory you touched in this session. Put all of them in one invocation.
+1. If the user passed directories after `/revu`, use exactly those. Otherwise collect every repo/worktree directory you touched in this session. Put all of them in one invocation.
 2. Run `revu <dir> [<dir> ...]` with the Bash tool and **`run_in_background: true`**. A review can take far longer than any foreground timeout.
    - Add `--base REF` only if the user named a base. A single directory can carry its own base: `revu ../Data=origin/develop`.
    - If the shell reports that `revu` is not found on PATH, tell the user to install it with `brew install schneidenbach/tap/revu` (or, from a checkout of the revu repository, `scripts/install.sh`). Do not try to build or install it yourself.

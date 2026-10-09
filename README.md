@@ -34,7 +34,7 @@ npx skills@latest add schneidenbach/skills
 ## Q&A
 
 **How does feedback get back to my agent?**
-`revu` blocks until you submit or close the window, then prints the review (Markdown, or JSON with `--json`) to stdout and exits. An agent that ran it as a background command is woken when it exits and reads the output. With the Claude Code skill, say `/revu` and Claude opens the review for the repos it touched, then works through your comments.
+`revu` blocks until you submit or close the window, then prints the review (Markdown, or JSON with `--json`) to stdout and exits. An agent that ran it as a background command is woken when it exits and reads the output. With the Claude Code skill, type `/revu` (optionally followed by directories) and Claude opens the review for the repos it touched, then works through your comments. The skill only runs when you invoke it.
 
 **How is the base branch picked, and how do I change it?**
 For each repo, revu compares against the closest of `origin/HEAD`, `origin/main`, `origin/master`, `origin/develop` and the local `main`, `master`, `develop` (fewest commits since the merge-base), skipping the current branch and its upstream. On the default branch it uses the upstream, so unpushed commits show up, or `HEAD` if there is none. Override it for every repo with `--base REF`, or per directory with `dir=REF`:
