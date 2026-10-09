@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift --version
+      - run: swift build
+      # With Xcode selected (as on the runner) this is plain `swift test`.
+      - run: scripts/test.sh
+      - run: scripts/build-app.sh
